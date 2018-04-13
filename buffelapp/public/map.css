@@ -1,0 +1,25 @@
+#map1 {
+  height: 90%;
+  width: 90%;
+}
+#map2 {
+  height: 90%;
+  width: 90%;
+  margin: 20px 20px;
+}
+#juldayinfo{
+    background-color:rgb(245,245,234);
+    padding: 20px;
+    border:1px solid black;
+}
+#juldayinfo2{
+    background-color:rgb(245,245,234);
+    padding: 20px;
+    border:1px solid black;  
+}
+#myfooter{
+    text-align:center;
+}
+#juldaytext{
+    padding:10px;
+}

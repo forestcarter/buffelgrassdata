@@ -1,0 +1,11 @@
+# ignore generated files
+*.png
+*.html
+*.tif
+*.pyc
+
+
+#directories
+buffelapp/node_modules
+static
+buffelapp/public/tiles

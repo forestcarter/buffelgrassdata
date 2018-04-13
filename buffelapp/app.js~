@@ -1,0 +1,46 @@
+var express = require("express");
+var app = express();
+app.set("view engine", "ejs");
+app.use( express.static( "public" ) );
+
+app.get("/", function(req, res){
+if(req.query.alpha){
+	var myAlpha=req.query.alpha;
+}else{ var myAlpha = 0.7;}
+if(req.query.picCode){
+	var picCode=req.query.picCode;
+}else{ var picCode = 1;}
+  
+    res.render("landing",{picCode:picCode, myAlpha:myAlpha});
+});
+
+app.get("/download", function(req, res){
+    if(req.query.dlnum){
+	mypath="./public/downloads/"
+	filenum=String(req.query.ndviorqual)+String(req.query.dlnum)+".tif";
+	console.log(filenum);
+	console.log("That was filenum");
+	//res.setHeader('Content-disposition', 'attachment; filename='+filenum);
+	//res.setHeader('Content-type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+	console.log(path.resolve(mypath));
+	res.download(mypath,filenum, function(err){
+	    if (err){
+		console.log(err)
+	    }else{
+		console.log("no error")
+	    }
+
+	});
+
+
+
+
+
+    }   		    
+	res.render("download");
+    
+});
+	
+app.listen(80, function(){
+  console.log("Server has started");
+});

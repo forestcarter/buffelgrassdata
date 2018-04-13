@@ -1,0 +1,35 @@
+<html>
+<head>
+<script
+     src="https://code.jquery.com/jquery-3.3.1.js"
+     integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+       crossorigin="anonymous"></script> 
+</head>
+  <body>
+    <div class="container">
+      <div class="page-header">
+	<h3>Downloads</h3> 
+      </div>
+    </div>
+    <form action = "/download2" method = "GET">
+ 	  ndvi or qual:<br>
+  	  <input type = "text" name = "ndviorqual" ><br>
+  	  <br>Timeframe (1-8, see options below)<br>
+  	  <input type = "text"  name = "dlnum" ><br>
+	  <input type ="submit">
+    </form>
+
+	<p><u>Current</u></p>
+<p id='updatedates1' class='downloadable'><strong>1.</strong>   96-102 minus 89-95      2018</p>
+<p id='updatedates2' class='downloadable'><strong>2.</strong>   89-95 minus 82-88      2018</p>
+<p id='updatedates3' class='downloadable'><strong>3.</strong>   82-88 minus 75-81      2018</p>
+<p id='updatedates4' class='downloadable'><strong>4.</strong>   75-81 minus 68-74      2018</p>
+	<p><u>Historical</u></p>
+<p id='updatedates5' class='downloadable'><strong>5.</strong>   217-223 minus 210-216      2017</p>
+<p id='updatedates6' class='downloadable'><strong>6.</strong>   210-216 minus 203-209      2017</p>
+<p id='updatedates7' class='downloadable'><strong>7.</strong>   203-209 minus 196-202      2017</p>
+<p id='updatedates8' class='downloadable'><strong>8.</strong>   196-202 minus 189-195      2017</p>
+   
+
+</body>
+</html>

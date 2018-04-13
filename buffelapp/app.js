@@ -25,7 +25,7 @@ app.get("/download", function(req, res){
 app.get("/download2", function(req, res){  
     
     if(req.query.dlnum){
-	filenum=String(req.query.ndviorqual)+String(req.query.dlnum)+".tif";
+	filenum=String(req.query.ndviorqual)+String(req.query.dlnum)+String(req.query.rmdortmd)+".tif";
 	console.log(filenum);
 	console.log("That was filenum");
 	pathToFile =  (__dirname + '/public/tiles/downloads/'+filenum);

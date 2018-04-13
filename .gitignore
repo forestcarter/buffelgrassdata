@@ -3,7 +3,7 @@
 *.html
 *.tif
 *.pyc
-
+*~
 
 #directories
 buffelapp/node_modules

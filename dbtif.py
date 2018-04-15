@@ -1,29 +1,25 @@
 # Set environment variables for database connection
-import  subprocess
+import os
+import subprocess
+import shlex
+#subprocess.call(shlex.split("echo hi"))
 
-subprocess.call(shlex.split("set PGUSER=root"))
-subprocess.call(shlex.split("set PGDATABASE=ndvidb"))
+folderpath = os.path.join(os.getcwd(),'buffelapp','public',"tiles","dbvrt")
+vrtlist=[]
+for item in os.listdir(folderpath):
+    if item[-4:]==".vrt":
+        vrtlist.append(item)
 
-tiflist=["dbold.tif","dbnew.tif"]
+
 projnum="4226"
-
-
-
-#set PGHOST=db.qgiscloud.com
-#set PGPORT=5432
-
-#set PGPASSWORD=enter_qgiscloud_pw
-#set PGDATABASE=ndvidb
-
-
-
-
-# Call the raster2pqsql utility
-
 schema="public"
 
-for myfile in tiflist:
-    
-    mypath = os.path.join(os.getcwd(),'buffelapp','public',"tiles","dbtif",)
+for item in vrtlist:
 
-    subprocess.call(shlex.split("raster2pgsql -s {0} -C -F -t auto {1} {2}.{3} | psql").format(projnum,mypath,schema,myfile[:5]))
+    
+    itempath= os.path.join(folderpath,item)
+    mystring =("raster2pgsql -s {0} -I -C -M {1} -F -t 105x62 {2}.{3} | psql -d ndvidb").format(projnum,itempath,schema,item[:10])
+    
+
+    os.system(mystring)
+

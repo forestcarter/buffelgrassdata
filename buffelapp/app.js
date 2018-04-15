@@ -19,6 +19,21 @@ if(req.query.picCode){
     res.render("landing",{picCode:picCode, myAlpha:myAlpha});
 });
 
+
+app.get("/graph", function(req, res){
+    console.log("graph hit");
+if(req.query.mylat){
+	var mylat=req.query.mylat;
+}
+if(req.query.mylong){
+	var mylong=req.query.mylong;
+}
+  
+    res.render("graph",{mylat:mylat, mylong:mylong});
+});
+
+
+
 app.get("/download", function(req, res){  
     res.render("download");
 });

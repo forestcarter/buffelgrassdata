@@ -42,13 +42,19 @@ def process(newdate, olddate, picname, year, outzoom, inzoom, district):
     projfirstold = os.path.join(mypath,"histprojfirstold.vrt")
     projclippednew=os.path.join(mypath,"histprojclippednew.vrt")
     projclippedold=os.path.join(mypath,"histprojclippedold.vrt")
+    
     colorvrt=os.path.join(mypath,"colorvrt.vrt")
     rgbvrt=os.path.join(mypath,"rgbvrt.vrt")
     #colorpng=os.path.join(mypath,"buffelapp/public/colorpng.png")
     tilefolder=os.path.join(os.getcwd(),'buffelapp','public','tiles')
     downloadfolder=os.path.join(tilefolder,'downloads')
+    dbtiffolder=os.path.join(tilefolder,'dbtif')
     ndvitif=os.path.join(downloadfolder,"ndvi{0}{1}.tif".format(picname,district))
     qualtif=os.path.join(downloadfolder,"qual{0}{1}.tif".format(picname,district))                     
+
+    #new db variables
+    projclippednewdb=os.path.join(dbtifolder,"dbnew.vrt")
+    projclippedolddb=os.path.join(dbftifolder,"dbold.vrt")
     
     #NDVI
     print os.getcwd()
@@ -70,6 +76,9 @@ def process(newdate, olddate, picname, year, outzoom, inzoom, district):
     subprocess.call(shlex.split("{2}gdalwarp -s_srs EPSG:2163 -t_srs EPSG:4326 -of VRT -overwrite {0} {1} ".format(oldtif, projfirstold,mainpath)))
     subprocess.call(shlex.split("{6}gdal_translate {0} {1} -of VRT -projwin {2} {3} {4} {5}".format(projfirstnew, projclippednew, xmin,ymax, xmax,ymin,mainpath)))
     subprocess.call(shlex.split("{6}gdal_translate {0} {1} -of VRT -projwin {2} {3} {4} {5}".format(projfirstold, projclippedold, xmin,ymax, xmax,ymin,mainpath)))
+    #Save raw values for database
+    subprocess.call(shlex.split("{6}gdal_translate {0} {1} -of VRT -projwin {2} {3} {4} {5}".format(projfirstnew, projclippednewdb, xmin,ymax, xmax,ymin,mainpath)))
+    subprocess.call(shlex.split("{6}gdal_translate {0} {1} -of VRT -projwin {2} {3} {4} {5}".format(projfirstold, projclippedolddb, xmin,ymax, xmax,ymin,mainpath)))
     calc = "A-B"
 
         #New minus old, high values have greened up

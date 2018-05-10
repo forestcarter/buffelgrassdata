@@ -10,7 +10,7 @@ preciplag=0
 zoomout=10
 zoomin=15
 dlcurrent=True
-dlhist=True
+dlhist=False
 dlprecipitation=True
 precipdays=24
 today=str(datetime.datetime.now())
@@ -54,8 +54,8 @@ if dlcurrent==True:
                 print ("dlworked")
                 download.changedates(newdate[num], olddate[num], pages[num],today[:4],julday,landingvar)
                 download.changedates(newdate[num], olddate[num], pages[num],today[:4],julday,downloadvar)
-                process.process(newdate[num], olddate[num], pages[num],today[:4],zoomout,zoomin,"rmd")
-                process.process(newdate[num], olddate[num], pages[num],today[:4],zoomout,zoomin,"tmd")
+                process.process(newdate[num], olddate[num], pages[num],today[:4],zoomout,zoomin,"rmd",num)
+                process.process(newdate[num], olddate[num], pages[num],today[:4],zoomout,zoomin,"tmd",num)
                 print ("Completed request {} ".format(num))
         except Exception as e2:
             print(" failed {0} {1} {2} {3}".format(newdate[num], olddate[num], pages[num],today[:4]))

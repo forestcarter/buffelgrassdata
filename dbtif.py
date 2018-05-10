@@ -7,11 +7,11 @@ import shlex
 folderpath = os.path.join(os.getcwd(),'buffelapp','public',"tiles","dbvrt")
 vrtlist=[]
 for item in os.listdir(folderpath):
-    if item[-4:]==".vrt":
+    if item[-4:]==".tif":
         vrtlist.append(item)
 
 
-projnum="4226"
+projnum="4326"
 schema="public"
 
 for item in vrtlist:
@@ -22,4 +22,5 @@ for item in vrtlist:
     
 
     os.system(mystring)
+    print (mystring)
 

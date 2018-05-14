@@ -37,7 +37,10 @@ var overlaymaps = {"RMD_NDVI": lyr1, "RMD_QUAL":lyr2,"TMD_NDVI": lyr3, "TMD_QUAL
 
 L.control.layers(basemaps, overlaymaps).addTo(map2);
 map2.on("click", function (event){
-    mapcoords.innerHTML= event.latlng.toString()
+    incominglat.defaultValue=  event.latlng.lat
+    incominglong.defaultValue=  event.latlng.lng
+    incomingjulday.defaultValue= updatejulday.innerHTML.slice(-3)
+
 });
 
     //Downloads

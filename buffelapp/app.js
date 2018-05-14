@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var fs = require('file-system');
 var path = require('path');
+const db = require('./db')
+
 app.set("view engine", "ejs");
 app.use( express.static( "public" ) );
 //app.set('views','./views');
@@ -20,17 +22,58 @@ if(req.query.picCode){
 });
 
 
-app.get("/graph", function(req, res){
-    console.log("graph hit");
-if(req.query.mylat){
+//app.get("/graph", function(req, res){
+function findDataPoints(req,res,next){
+    pointsList=[]
+    if(req.query.mylat){
 	var mylat=req.query.mylat;
-}
-if(req.query.mylong){
+    }
+    if(req.query.mylong){
 	var mylong=req.query.mylong;
+    }
+    if(req.query.julday){
+	var julday=req.query.julday;
+    }
+    var district = "rmd"
+    if (mylong<-110.9){
+	var district="tmd"
+    }   
+    for(var i=0; i<15; i+=5){
+	var dbRequest ="SELECT ST_Value(rast, foo.pt_geom) AS b1pval FROM rmd1142018 CROSS JOIN (SELECT ST_SetSRID(ST_MakePoint(-110.6182,32.20), 4326) AS pt_geom) AS foo;"
+	var dbRequest =`SELECT ST_Value(rast, foo.pt_geom) AS b1pval FROM ${district}${julday-i}2018 CROSS JOIN (SELECT ST_SetSRID(ST_MakePoint(${mylong},${mylat}), 4326) AS pt_geom) AS foo;`
+    console.log(dbRequest)
+    db.query(dbRequest, function(error, rows){
+	parsedRows=rows.rows[0].b1pval
+
+	if(typeof(parsedRows) === "number") {
+	    pointsList.push(parsedRows);
+	    console.log("local"+pointsList.length)
+	    console.log(pointsList.length)
+	    if (pointsList.length==3){
+		req.point1 = pointsList
+		return next()}
+
+
+	}
+    });
+    }
+    	    	
+};
+
+
+function renderGraphPage(req, res) {
+    console.log("render graph2");
+    console.log(req.point1[0])
+    res.render('graph', {
+	point1: req.point1[0],
+	point2: req.point1[1],
+	point3: req.point1[2]
+	});
 }
-  
-    res.render("graph",{mylat:mylat, mylong:mylong});
-});
+        
+app.get("/graph",findDataPoints,renderGraphPage);  
+//    res.render("graph",{mylat:mylat, mylong:mylong});
+
 
 
 

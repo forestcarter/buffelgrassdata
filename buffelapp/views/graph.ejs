@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Buffelgrass NDVI Viewer Homepage</title>
+  <title>NDVI Values in Pixel</title>
   <script src="lib/leaflet/leaflet.js"></script>
    <link rel="stylesheet" href="lib/leaflet/leaflet.css">
   <link rel="stylesheet" href="map.css">
@@ -18,15 +18,17 @@
 	<h3>Graph Page</h3> 
       </div>
     </div>
-<p>Here will be the graph for <span
- <p>Lat: <span id="latspan">None</span> Long: <span id="longspan">None2</span>
+
+    <p>point1: <span id="point1span">None</span>
+    <p>point2: <span id="point2span">None</span>
+    <p>point3: <span id="point3span">None</span>
+      
     </p>
-    
 </body>
 <script>
-  
-  var mylat = <%- mylat %>;
-  var mylong = <%- mylong %>;
+  var point1 = <%- point1 %>;
+  var point2 = <%- point2 %>;
+  var point3 = <%- point3 %>;
 </script>
 <script type="text/javascript" src="graph.js"></script>
 

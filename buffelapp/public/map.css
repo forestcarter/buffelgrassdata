@@ -17,8 +17,27 @@
     padding: 20px;
     border:1px solid black;  
 }
-#myfooter{
-    text-align:center;
+
+body {
+	margin:0;
+	padding:0;
+	height:100%;
+    }
+    #container2 {
+	min-height:100%;
+	position:relative;
+    }
+
+    
+    #bodyDiv {
+	padding:10px;
+	padding-bottom:60px;   /* Height of the footer */
+    }
+    #myfooter {
+	width:100%;
+	height:60px;   /* Height of the footer */
+	background:#6cf;
+    }
 }
 #juldaytext{
     padding:10px;

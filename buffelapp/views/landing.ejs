@@ -14,6 +14,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
   <body>
+    <div id="container2">
+      <div id="bodyDiv">
     <div class="container">
       <div class="page-header">
 	<h3>EMODIS NDVI Viewer</h3> 
@@ -72,14 +74,63 @@
 	  Day of Year:<br>
 	  <input type = "text" name = "julDay" id="incomingjulday" value="None" ><br>
 	  <input type ="submit">
-    </form>
-<svg height="200" width="500"></svg>
-    
+</form>
+
+
+
+  <div id = "colorRampDiv">
+    <svg height="250" width="50"></svg>
+  </div>
+  <div id="scaleNumDiv">
+    <p class="scaleNum1">1</p>
+    <p class="scaleNum">2</p>
+    <p class="scaleNum">3</p>
+    <p class="scaleNum">4</p>
+    <p class="scaleNum">5</p>
+    <p class="scaleNum">6</p>
+    <p class="scaleNum">7</p>
+
+  </div>
+  <div id="spacer"></div>
+      
+<style>
+  .sgvColorRamp{
+  height: 500px;
+  width: 200px;
+  }
+  .scaleNum{
+  margin: 0px;
+  padding: 0px 0px 20px 0px;
+  }
+  #spacer{
+  height: 210px;
+  width:100px;
+  margin: 0px;
+  padding: 0px 0px 19px 0px;
+  }
+  .scaleNum1{
+  margin: 0px;
+  padding:0px 0px 2px 0px;
+  }
+  #scaleNumDiv{
+  padding:0px;
+  float: left;
+  width: 80px;
+  }
+  #colorRampDiv{
+  padding: 0px;
+  margin: 10px 0px 10px 0px;
+  width: 45px;
+  float: left;
+  }
+  </style>
+</div>
 <div id="myfooter">
   <p>Data available from the U.S. Geological Survey</p>
   <a href="https://pubs.usgs.gov/of/2010/1055/pdf/OF2010-1055.pdf">EMODIS DOCS</a>	   
   </div>
-  
+
+</div>
 </body>
 <script>
   var myAlpha = <%- myAlpha %>;

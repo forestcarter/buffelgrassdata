@@ -2,6 +2,7 @@
 <head>
   <title>Buffelgrass NDVI Viewer Homepage</title>
   <script src="lib/leaflet/leaflet.js"></script>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
    <link rel="stylesheet" href="lib/leaflet/leaflet.css">
   <link rel="stylesheet" href="map.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -33,14 +34,14 @@
     <div class="col-md-3">
       <div id = "juldayinfo">
 	<p> All dates are in Day of Year format</p>
-<p id='updatejulday'>Today is Day of Year 134</p>
-<p id='updatep'>Precipitation data updated Day of Year 133</p>
+<p id='updatejulday'>Today is Day of Year 135</p>
+<p id='updatep'>Precipitation data updated Day of Year 135</p>
 	<P>Timeframe options(most recent first):</p>
 	<p><u>Current</u></p>
-<p id='updatedates1' class='downloadable'><strong>1.</strong>   127-133 minus 120-126      2018</p>
-<p id='updatedates2' class='downloadable'><strong>2.</strong>   120-126 minus 113-119      2018</p>
-<p id='updatedates3' class='downloadable'><strong>3.</strong>   112-118 minus 105-111      2018</p>
-<p id='updatedates4' class='downloadable'><strong>4.</strong>   105-111 minus 98-104      2018</p>
+<p id='updatedates1' class='downloadable'><strong>1.</strong>   128-134 minus 121-127      2018</p>
+<p id='updatedates2' class='downloadable'><strong>2.</strong>   121-127 minus 114-120      2018</p>
+<p id='updatedates3' class='downloadable'><strong>3.</strong>   114-120 minus 107-113      2018</p>
+<p id='updatedates4' class='downloadable'><strong>4.</strong>   107-113 minus 100-106      2018</p>
 	<p><u>Historical</u></p>
 <p id='updatedates5' class='downloadable'><strong>5.</strong>   217-223 minus 210-216      2017</p>
 <p id='updatedates6' class='downloadable'><strong>6.</strong>   210-216 minus 203-209      2017</p>
@@ -69,10 +70,10 @@
 	  Long:<br>
   	  <input type = "text" name = "mylong" id="incominglong" value="None" ><br>
 	  Day of Year:<br>
-	  <input type = "text" name = "julday" id="incomingjulday" value="None" ><br>
+	  <input type = "text" name = "julDay" id="incomingjulday" value="None" ><br>
 	  <input type ="submit">
     </form>
-
+<svg height="200" width="500"></svg>
     
 <div id="myfooter">
   <p>Data available from the U.S. Geological Survey</p>
@@ -85,6 +86,7 @@
   var picCode = <%- picCode %>;
 
 </script>
+<script type="text/javascript" src="colorramp.js"></script>
 <script type="text/javascript" src="map.js"></script>
 
 

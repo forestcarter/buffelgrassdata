@@ -19,6 +19,13 @@ d3.text('colors.txt', function(err, data) {
 	    return { v: d[0], r: +d[1], g: +d[2], b: +d[3] };
 	});
 
+
+    //update values
+    console.log(`MYVAL ${data[0].v}`);
+    document.getElementById(`scale1`).innerHTML = `${data[0].v}`;
+    for(var i =2; i<9;i++){
+	document.getElementById(`scale${i}`).innerHTML = `${data[i*2-3].v}`;
+    }
     console.log(JSON.stringify(data));
 
     // render strings for use as Sass variables (choose not to go this route)

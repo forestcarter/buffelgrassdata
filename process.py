@@ -95,11 +95,10 @@ def process(newdate, olddate, picname, year, outzoom, inzoom, district, num=1):
     
     subprocess.call(shlex.split("{1}gdal_translate -of GTiff {0} {2}".format(projfirstcalc, mainpath, ndvitif)))    
     subprocess.call(shlex.split("{2}gdaldem color-relief -of VRT {0} {3} {1}".format(projfirstcalc,colorvrt,mainpath,os.path.join(os.getcwd(),'colors.txt'))))
+    subprocess.call(shlex.split("cp {0} {1}".format(os.path.join(os.getcwd(),'colors.txt'),os.path.join(os.getcwd(),'buffelapp','public', 'colors.txt'))))
     subprocess.call(shlex.split("{1}gdal_translate {0} {2}".format(colorvrt, mainpath, rgbvrt)))
 
     subprocess.call(shlex.split("{0}gdal2tiles.py -z {2}-{3} {1} {4} ".format(mainpath,colorvrt, outzoom, inzoom,ndvifolder)))
-
-    #subprocess.call(shlex.split("{2}gdaldem color-relief -of PNG {0} {3}colors.txt {1}".format(projfirstcalc,colorpng,mainpath,mypath))
 
     #Qual
    

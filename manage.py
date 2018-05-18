@@ -9,8 +9,8 @@ os.chdir(os.path.dirname(os.path.realpath(__file__)))
 preciplag=0
 zoomout=10
 zoomin=15
-dlcurrent=True
-dlhist=True
+dlcurrent=False
+dlhist=False
 dlprecipitation=True
 precipdays=24
 today=str(datetime.datetime.now())

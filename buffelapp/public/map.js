@@ -1,14 +1,14 @@
 var map2 = L.map('map2', ({                  
 	            maxZoom: 15
-	        })).setView([32.1874446, -110.6185017],11);
+	        })).setView([32.1874446, -110.9185017],10);
 
 var streets = L.tileLayer('http://a.tile.openstreetmap.org/{z}/{x}/{y}.png',
 {attribution: 'Map data &coipy OpenStreetMap contributors'
-});
+}).addTo(map2);
 
 var imagery = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
     attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-}).addTo(map2);
+});
 
 var basemaps = {"Streets":streets, "ESRI Imagery":imagery}
 

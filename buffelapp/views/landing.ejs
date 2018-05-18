@@ -25,31 +25,46 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-3">
-    <form action = "/" method = "GET">
+      <h4>NDVI Raster</h4>
+      <form action = "/" method = "GET">
  	  Opacity (0-1):<br>
   	  <input type = "text" name = "alpha" ><br>
-  	  <br>Timeframe (1-8, see options below)<br>
+  	  <br>Timeframe (1-8, see options at right)<br>
   	  <input type = "text"  name = "picCode" ><br>
 	  <input type ="submit">
     </form>
+
+	<br>
+<h4>Show Graph at Location</h4>
+<form action = "/graph" method = "GET">
+ 	  Latitude:<br>
+  	  <input type = "text" name = "mylat" id="incominglat" value="None" ><br>
+	  Longitude:<br>
+  	  <input type = "text" name = "mylong" id="incominglong" value="None" ><br>
+	  Day of Year:<br>
+	  <input type = "text" name = "julDay" id="incomingjulday" value="None" ><br>
+	  <input type ="submit">
+</form>
+<br>
+<a href="/download">Choose Data for Download</a>
     </div>
     <div class="col-md-3">
       <div id = "juldayinfo">
 	<p> All dates are in Day of Year format</p>
-<p id='updatejulday'>Today is Day of Year 137</p>
-<p id='updatep'>Precipitation data updated Day of Year 137</p>
+<p id='updatejulday'>Today is Day of Year 138</p>
+<p id='updatep'>Precipitation data updated Day of Year 138</p>
 	<P>Timeframe options(most recent first):</p>
 	<p><u>Current</u></p>
-<p id='updatedates1' class='downloadable'><strong>1.</strong>   130-136 minus 123-129      2018</p>
-<p id='updatedates2' class='downloadable'><strong>2.</strong>   123-129 minus 116-122      2018</p>
-<p id='updatedates3' class='downloadable'><strong>3.</strong>   116-122 minus 109-115      2018</p>
-<p id='updatedates4' class='downloadable'><strong>4.</strong>   109-115 minus 102-108      2018</p>
+<p id='updatedates1' class='downloadable'><strong>1.</strong>   131-137 minus 124-130      2018</p>
+<p id='updatedates2' class='downloadable'><strong>2.</strong>   124-130 minus 117-123      2018</p>
+<p id='updatedates3' class='downloadable'><strong>3.</strong>   117-123 minus 110-116      2018</p>
+<p id='updatedates4' class='downloadable'><strong>4.</strong>   110-116 minus 103-109      2018</p>
 	<p><u>Historical</u></p>
 <p id='updatedates5' class='downloadable'><strong>5.</strong>   217-223 minus 210-216      2017</p>
 <p id='updatedates6' class='downloadable'><strong>6.</strong>   210-216 minus 203-209      2017</p>
 <p id='updatedates7' class='downloadable'><strong>7.</strong>   203-209 minus 196-202      2017</p>
 <p id='updatedates8' class='downloadable'><strong>8.</strong>   196-202 minus 189-195      2017</p>
-<a href="/download">Choose Data for Download</a>
+
       </div>
     </div>   
     <div class="col-md-6" >
@@ -64,19 +79,13 @@
   </div>
 
 <div id="map2"></div>
-	
-<h3>Show Graph</h3>
-<form action = "/graph" method = "GET">
- 	  Lat:<br>
-  	  <input type = "text" name = "mylat" id="incominglat" value="None" ><br>
-	  Long:<br>
-  	  <input type = "text" name = "mylong" id="incominglong" value="None" ><br>
-	  Day of Year:<br>
-	  <input type = "text" name = "julDay" id="incomingjulday" value="None" ><br>
-	  <input type ="submit">
-</form>
+
+<div id="ndvidiv">
+  <h5>NDVI Legend</h5>
+
   <div id = "colorRampDiv">
-    <svg height="250" width="50"></svg>
+
+    <svg id="svg1" height="250" width="50"></svg>
   </div>
   <div id="scaleNumDiv">
     <p id ="scale1" class="scaleNum1"></p>
@@ -88,15 +97,22 @@
     <p id ="scale7" class="scaleNum"></p>
     <p id ="scale8" class="scaleNum"></p>
   </div>
-  <div id="spacer"></div>
-      </div>
-      
-<div id="myfooter">
-  <p>Data available from the U.S. Geological Survey</p>
-  <a href="https://pubs.usgs.gov/of/2010/1055/pdf/OF2010-1055.pdf">EMODIS DOCS</a>	   
-  </div>
-
 </div>
+<div id="preciplegend">
+ <a href="/legend">Precipitation Legend</a>
+
+</div> 
+    
+    </div>
+    <div id="myfooter">
+  <p>NDVI data available from the U.S. Geological Survey  <a href="https://pubs.usgs.gov/of/2010/1055/pdf/OF2010-1055.pdf">EMODIS DOCS</a>
+</p>
+  <br>
+  <p>Precipitation data available from NOAA  <a href="https://pubs.usgs.gov/of/2010/1055/pdf/OF2010-1055.pdf">AHPS</a>	   
+</p>
+</div>
+
+
 </body>
 <script>
   var myAlpha = <%- myAlpha %>;

@@ -69,6 +69,7 @@ def ahpsprocess(outzoom,inzoom,precipdays, delay):
     #subprocess.call(shlex.split("{5} {4}gdal_calc.py -A {0} --outfile={2} --calc=A*(A>=0) --overwrite".format(ahpsbase,ahpsadd,ahpsbase,calc2, mainpath,pypath))
     subprocess.call(shlex.split("{2}gdaldem color-relief -of VRT {0} colorsahps.txt {1}".format(ahpsbase,colorahps,mainpath)))
 
+    subprocess.call(shlex.split("cp {0} {1}".format(os.path.join(os.getcwd(),'colorsahps.txt'),os.path.join(os.getcwd(),'buffelapp','public', 'colorsahps.txt'))))
     #subprocess.call(shlex.split("{1}gdal_translate {0} {2}".format(colorvrt, mainpath, rgbvrt))
     
     subprocess.call(shlex.split("{0}gdal2tiles.py -z {2}-{3} {1} {4} ".format(mainpath,colorahps, outzoom, inzoom,delayfolder)))

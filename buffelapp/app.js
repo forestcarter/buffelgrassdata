@@ -60,7 +60,6 @@ function findDataPoints(req,res,next){
 		req.point1 = pointsList
 		return next()}
 
-
 	}
     });
     }
@@ -93,6 +92,7 @@ app.get("/graph",findDataPoints,renderGraphPage);
 app.get("/download", function(req, res){  
     res.render("download");
 });
+
 app.get("/download2", function(req, res){  
     
     if(req.query.dlnum){
@@ -112,6 +112,10 @@ app.get("/download2", function(req, res){
     }
 //res.redirect("/download");
        
+});
+
+app.get("/legend", function(req, res){  
+    res.render("legend");
 });
 	
 app.listen(80, function(){

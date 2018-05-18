@@ -42,24 +42,14 @@
   <body>
     <div class="container">
       <div class="page-header">
-	<h3>Graph Page</h3> 
+	<h3>NDVI Composite Values in Pixels</h3> 
       </div>
     </div>
     
 
     <div id="graph" class="aGraph" style="position:absolute;top:0px;left:0; float:left;"></div>
 
-
-
-
-
-
-
-
   </body>
-
-
-
 
 
 
@@ -91,7 +81,7 @@
       // X scale will fit all values from data[] within pixels 0-w
       var x = d3.scale.linear().domain([minDay, maxDay]).range([0, w]);
       // Y scale will fit values from 0-10 within pixels h-0 (Note the inverted domain for the y-scale: bigger is up!)
-      var y = d3.scale.linear().domain([2000, 8000]).range([h, 0]);
+      var y = d3.scale.linear().domain([0, 8000]).range([h, 0]);
       // automatically determining max range can work something like this
      // var y = d3.scale.linear().domain([0, 1.2*d3.max(data)]).range([h, 0]);
       // create a line function that can convert data[] into x and y points

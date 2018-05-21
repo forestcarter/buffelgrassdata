@@ -6,11 +6,11 @@ import ahpsdownload
 import ahpsprocess
 
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-preciplag=0
+preciplag=240
 zoomout=10
 zoomin=15
-dlcurrent=False
-dlhist=False
+dlcurrent=True
+dlhist=True
 dlprecipitation=True
 precipdays=24
 today=str(datetime.datetime.now())

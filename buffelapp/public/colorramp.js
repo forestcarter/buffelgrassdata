@@ -21,7 +21,7 @@ d3.text('colors.txt', function(err, data) {
 
     //update values
     console.log(`MYVAL ${data[0].v}`);
-    document.getElementById(`scale1`).innerHTML = `${data[0].v}`;
+    document.getElementById(`scale1`).innerHTML = "No Data";
     for(var i =2; i<9;i++){
 	document.getElementById(`scale${i}`).innerHTML = `${data[i*2-3].v}`;
     }

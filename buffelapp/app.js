@@ -6,7 +6,6 @@ const db = require('./db')
 
 app.set("view engine", "ejs");
 app.use( express.static( "public" ) );
-//app.set('views','./views');
 
 app.get("/", function(req, res){
     console.log("landing hit");
@@ -20,7 +19,7 @@ if(req.query.picCode){
     res.render("landing",{picCode:picCode, myAlpha:myAlpha});
 });
 
-//app.get("/graph", function(req, res){
+
 function findDataPoints(req,res,next){
     pointsList=[]
     if(req.query.mylat){
@@ -59,13 +58,10 @@ function findDataPoints(req,res,next){
 	    if (pointsList.length==6){
 		req.point1 = pointsList
 		return next()}
-
 	}
     });
     }
-    	    	
 };
-
 
 function renderGraphPage(req, res) {
     console.log("render graph2");
@@ -84,10 +80,6 @@ function renderGraphPage(req, res) {
 }
         
 app.get("/graph",findDataPoints,renderGraphPage);  
-//    res.render("graph",{mylat:mylat, mylong:mylong});
-
-
-
 
 app.get("/download", function(req, res){  
     res.render("download");
@@ -97,20 +89,14 @@ app.get("/download2", function(req, res){
     
     if(req.query.dlnum){
 	filenum=String(req.query.ndviorqual)+String(req.query.dlnum)+String(req.query.rmdortmd)+".tif";
-	console.log(filenum);
-	console.log("That was filenum");
 	pathToFile =  (__dirname + '/public/tiles/downloads/'+filenum);
 	console.log("Path to file="+pathToFile);
 	pathToFile2 = path.join(__dirname, '/public/tiles/downloads/',filenum)
-	console.log("Path to file2="+pathToFile2);
-	//console.log(path.exists(pathToFile2));
-	console.log(fs.existsSync(pathToFile2));
 	res.download(pathToFile2,function(err){
 	    console.log(err);
 	    res.end();
 	});	     
     }
-//res.redirect("/download");
        
 });
 

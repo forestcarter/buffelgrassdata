@@ -6,7 +6,7 @@ import ahpsdownload
 import ahpsprocess
 
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
-preciplag=240
+preciplag=0
 zoomout=10
 zoomin=15
 dlcurrent=True

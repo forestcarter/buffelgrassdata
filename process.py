@@ -84,10 +84,12 @@ def process(newdate, olddate, picname, year, outzoom, inzoom, district, num=1):
         
         projnum="4326"
         schema="public"   
+        districtDim = {"rmd":"105x62", "tmd":"77x51"}
 
-        mystring =("raster2pgsql -s {0} -I -C -M {1} -F -t 105x62 {2}.{3} | psql -d ndvidb").format(projnum,projclippednewdb,schema,dbfilename[:10])
+        mystring =("raster2pgsql -s {0} -I -C -M {1} -F -t {4} {2}.{3} | psql -d ndvidb").format(projnum,projclippednewdb,schema,dbfilename[:10],districtDim[district])
    
         os.system(mystring)
+        subprocess.call(shlex.split("rm {0}".format(projclippednewdb)))
     calc = "A-B"
 
         #New minus old, high values have greened up

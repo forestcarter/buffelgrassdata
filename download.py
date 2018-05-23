@@ -61,9 +61,7 @@ def histdownload(newdate, olddate, picname, year):
     if len(endrange2)==1:
         endrange2="0"+endrange2
     if len(endrange2)==2:
-            endrange2="0"+endrange2
-
-    
+            endrange2="0"+endrange2    
     
 
     #Download First Image
@@ -73,13 +71,11 @@ def histdownload(newdate, olddate, picname, year):
         os.system("rm {}".format(indexFile))
                   
 
-    
-
     dlhtml='/usr/bin/wget -P {2}  --no-proxy -t 3 -a {2}/dlhtml1.txt --no-check-certificate -L --user=fcarter --password=dS6oaPNwEAB7 --no-parent -A "US_eMAE_NDVI.{0}.*.QKM.*.zip" https://dds.cr.usgs.gov/emodis/CONUS6/expedited/AQUA/{0}/comp_{1}/'.format(year,str(endrange),staticPath)
     print(dlhtml)
 
     subprocess.call(shlex.split(dlhtml))
-    #os.system(dlhtml)
+
     indexFile = os.path.join(staticPath,'index.html.tmp')                       
     if os.path.isfile(indexFile):
         olddateworked=True
@@ -98,12 +94,15 @@ def histdownload(newdate, olddate, picname, year):
     download = '/usr/bin/wget --no-proxy -t 3 -a {3}/dldata1.txt -O {3}/ndvi1.zip --no-check-certificate -L --user=fcarter --password=dS6oaPNwEAB7 "https://dds.cr.usgs.gov/emodis/CONUS6/expedited/AQUA/{2}/comp_{0}/{1}"'.format(str(endrange), target, year, staticPath)
     print(download)
     subprocess.call(shlex.split(download))
-    #os.system(download)
+
     unzipCommand = "/usr/bin/unzip {1} -d {0}".format(os.path.join(staticPath,'histunzipped'),os.path.join(staticPath,'ndvi1.zip'))
     subprocess.call(shlex.split(unzipCommand))
-    
-    #os.system("/usr/bin/unzip {1} -d {0}".format(os.path.join(staticPath,'histunzipped'),os.path.join(staticPath,'ndvi1.zip')))
-    
+
+    for item in os.listdir(os.path.join(staticPath,'histunzipped')):
+        if "ACQI" in item:
+            delacqi = "rm {}".format(os.path.join(staticPath,'histunzipped',item))
+            subprocess.call(shlex.split(delacqi))
+            
     #Download Second Image
     print("beginning second image")
     if os.path.isfile(filename2):
@@ -140,6 +139,11 @@ def histdownload(newdate, olddate, picname, year):
     #os.system("/usr/bin/unzip {1} -d {0}".format(os.path.join(staticPath,'histunzipped2'),os.path.join(staticPath,'ndvi2.zip')))
     #os.system("rm ndvi2.zip")
 
+    for item in os.listdir(os.path.join(staticPath,'histunzipped2')):
+        if "ACQI" in item:
+            delacqi = "rm {}".format(os.path.join(staticPath,'histunzipped2',item))
+            subprocess.call(shlex.split(delacqi))
+            
 
 
 #############

@@ -9,7 +9,7 @@ def ahpsprocess(outzoom,inzoom,precipdays, delay):
     xmax=-109.4760646
     ymin=31.1035758
     ymax=33.6212308
-    
+    homeDir= os.getcwd()+"/"
     mypath = os.path.join(os.getcwd(),'static')
     pypath="/usr/bin/python"
     mainpath = "/usr/bin/"
@@ -64,7 +64,7 @@ def ahpsprocess(outzoom,inzoom,precipdays, delay):
     
         subprocess.call(shlex.split("{6}gdal_translate {0} {1} -of VRT -b 1 -projwin {2} {3} {4} {5}".format(ahpsvrt, ahpsadd, xmin,ymax, xmax,ymin,mainpath)))
         #subprocess.call(shlex.split("{6}gdalinfo -stats {1}".format(ahpsvrt, ahpsadd, xmin,ymax, xmax,ymin,mainpath))
-        subprocess.call(shlex.split('{5} {4}gdal_calc.py -A {0} -B {1} --outfile={2} --calc="{3}" --overwrite'.format(ahpsbase,ahpsadd,ahpsbase,calc, mainpath,pypath)))
+        subprocess.call(shlex.split('{5} {4}gdal_calc.py -A {0} -B {1} --outfile={2} --calc="{3}" --overwrite'.format(ahpsbase,ahpsadd,ahpsbase,calc, homeDir,pypath)))
     #subprocess.call(shlex.split("{1}gdal_translate -of GTiff {0} {2}".format(projfirstcalc, mainpath, ndvitif))
     #subprocess.call(shlex.split("{5} {4}gdal_calc.py -A {0} --outfile={2} --calc=A*(A>=0) --overwrite".format(ahpsbase,ahpsadd,ahpsbase,calc2, mainpath,pypath))
     subprocess.call(shlex.split("{2}gdaldem color-relief -of VRT {0} colorsahps.txt {1}".format(ahpsbase,colorahps,mainpath)))

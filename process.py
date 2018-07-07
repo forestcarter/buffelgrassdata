@@ -14,7 +14,8 @@ def process(newdate, olddate, picname, year, outzoom, inzoom, district, num=1):
         xmin=-111.264
         xmax=-111.054
         ymin=32.229
-        ymax=32.369    
+        ymax=32.369
+    homeDir=os.getcwd()+"/"
     mypath = os.path.join(os.getcwd(),'static')
     pypath="/usr/bin/python"
     mainpath = "/usr/bin/" 
@@ -54,7 +55,7 @@ def process(newdate, olddate, picname, year, outzoom, inzoom, district, num=1):
 
     #new db variables
     dbfilename="{0}{1}{2}.tif".format(district,'%03d'%newdate,year)
-    projclippednewdb=os.path.join(dbvrtfolder,dbfilename)
+    projclippednewdb=os.path.join(mypath, dbfilename)
 
         #NDVI
     print os.getcwd()
@@ -67,9 +68,10 @@ def process(newdate, olddate, picname, year, outzoom, inzoom, district, num=1):
         for newdist in ["tmd","rmd"]:
             for newpicname in xrange(1,9):
                 for newtype in ['ndvi','qual']:
-                   print("step5")
-                   subprocess.call(shlex.split("mkdir {}".format(os.path.join(tilefolder,newpicname,newdist,newtype))))
-
+                   
+                   print("mkdir {}".format(os.path.join(tilefolder,str(newpicname),newdist,newtype)))
+                   subprocess.call(shlex.split("mkdir -p {}".format(os.path.join(tilefolder,newdist,str(newpicname),newtype))))
+    print("step5.1")
     ndvifolder=os.path.join(tilefolder,district,str(picname),'ndvi')
     print(ndvifolder)
     subprocess.call(shlex.split("{2}gdalwarp -s_srs EPSG:2163 -t_srs EPSG:4326 -of VRT -overwrite {0} {1} ".format(newtif, projfirstnew,mainpath)))
@@ -77,7 +79,7 @@ def process(newdate, olddate, picname, year, outzoom, inzoom, district, num=1):
     subprocess.call(shlex.split("{6}gdal_translate {0} {1} -of VRT -projwin {2} {3} {4} {5}".format(projfirstnew, projclippednew, xmin,ymax, xmax,ymin,mainpath)))
     subprocess.call(shlex.split("{6}gdal_translate {0} {1} -of VRT -projwin {2} {3} {4} {5}".format(projfirstold, projclippedold, xmin,ymax, xmax,ymin,mainpath)))
     #Save raw values for database
-    
+    print("step5.2")
     if num==0:
         
         subprocess.call(shlex.split("{6}gdal_translate {0} {1} -of GTiff -projwin {2} {3} {4} {5}".format(projfirstnew, projclippednewdb, xmin,ymax, xmax,ymin,mainpath)))
@@ -87,21 +89,23 @@ def process(newdate, olddate, picname, year, outzoom, inzoom, district, num=1):
         districtDim = {"rmd":"105x62", "tmd":"77x51"}
 
         mystring =("raster2pgsql -s {0} -I -C -M {1} -F -t {4} {2}.{3} | psql -d ndvidb").format(projnum,projclippednewdb,schema,dbfilename[:10],districtDim[district])
-   
+        print("step5.3")
+        print(mystring)
         os.system(mystring)
         subprocess.call(shlex.split("rm {0}".format(projclippednewdb)))
     calc = "A-B"
 
         #New minus old, high values have greened up
-    subprocess.call(shlex.split("{5} {4}gdal_calc.py -A {0} -B {1} --outfile={2} --calc={3} --overwrite".format(projclippednew,projclippedold,projfirstcalc,calc, mainpath,pypath)))
-    
+    subprocess.call(shlex.split("{5} {4}gdal_calc.py -A {0} -B {1} --outfile={2} --calc={3} --overwrite".format(projclippednew,projclippedold,projfirstcalc,calc, homeDir,pypath)))
+    print("step5.3")
     subprocess.call(shlex.split("{1}gdal_translate -of GTiff {0} {2}".format(projfirstcalc, mainpath, ndvitif)))    
     subprocess.call(shlex.split("{2}gdaldem color-relief -of VRT {0} {3} {1}".format(projfirstcalc,colorvrt,mainpath,os.path.join(os.getcwd(),'colors.txt'))))
     subprocess.call(shlex.split("cp {0} {1}".format(os.path.join(os.getcwd(),'colors.txt'),os.path.join(os.getcwd(),'buffelapp','public', 'colors.txt'))))
     subprocess.call(shlex.split("{1}gdal_translate {0} {2}".format(colorvrt, mainpath, rgbvrt)))
-
-    subprocess.call(shlex.split("{0}gdal2tiles.py -z {2}-{3} {1} {4} ".format(mainpath,colorvrt, outzoom, inzoom,ndvifolder)))
-
+    print("step6")
+    print(homeDir)
+    subprocess.call(shlex.split("{0}/gdal2tiles.py -z {2}-{3} {1} {4} ".format(mainpath,colorvrt, outzoom, inzoom,ndvifolder)))
+    print("step7")
     #Qual
    
     qualfolder=os.path.join(tilefolder,district,str(picname),'qual')        
@@ -112,7 +116,7 @@ def process(newdate, olddate, picname, year, outzoom, inzoom, district, num=1):
     qualcalc = "A+B"
 
         #New minus old, high values have greened up
-    subprocess.call(shlex.split("{5} {4}gdal_calc.py -A {0} -B {1} --outfile={2} --calc={3} --overwrite".format(projclippednew,projclippedold,projfirstcalc,qualcalc, mainpath,pypath)))
+    subprocess.call(shlex.split("{5} {4}gdal_calc.py -A {0} -B {1} --outfile={2} --calc={3} --overwrite".format(projclippednew,projclippedold,projfirstcalc,qualcalc, homeDir,pypath)))
     
     subprocess.call(shlex.split("{1}gdal_translate -of GTiff {0} {2}".format(projfirstcalc, mainpath, qualtif)))  
     subprocess.call(shlex.split("{2}gdaldem color-relief -of VRT {0} {3} {1}".format(projfirstcalc,colorvrt,mainpath,os.path.join(os.getcwd(),'colorsq.txt'))))

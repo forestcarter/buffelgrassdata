@@ -71,12 +71,12 @@ def histdownload(newdate, olddate, picname, year):
         os.system("rm {}".format(indexFile))
                   
 
-    dlhtml='/usr/bin/wget -P {2}  --no-proxy -t 3 -a {2}/dlhtml1.txt --no-check-certificate -L --user=fcarter --password=dS6oaPNwEAB7 --no-parent -A "US_eMAE_NDVI.{0}.*.QKM.*.zip" https://dds.cr.usgs.gov/emodis/CONUS6/expedited/AQUA/{0}/comp_{1}/'.format(year,str(endrange),staticPath)
+    dlhtml='/usr/bin/wget -O {2} --no-proxy -t 3 -o dlhtml1.txt --no-check-certificate -L --user=fcarter --password=dS6oaPNwEAB7 --no-parent -A "US_eMAE_NDVI.{0}.*.QKM.*.zip" https://dds.cr.usgs.gov/emodis/CONUS6/expedited/AQUA/{0}/comp_{1}/'.format(year,str(endrange),indexFile, staticPath)
     print(dlhtml)
 
     subprocess.call(shlex.split(dlhtml))
 
-    indexFile = os.path.join(staticPath,'index.html.tmp')                       
+    #indexFile = os.path.join(staticPath,'index.html.tmp')                       
     if os.path.isfile(indexFile):
         olddateworked=True
         print("olddateworked set to true")
@@ -91,10 +91,10 @@ def histdownload(newdate, olddate, picname, year):
         if "NDVI" in item and "QKM" in item and not ".sum" in item:
             target=item[9:68]
             print (target)
-    download = '/usr/bin/wget --no-proxy -t 3 -a {3}/dldata1.txt -O {3}/ndvi1.zip --no-check-certificate -L --user=fcarter --password=dS6oaPNwEAB7 "https://dds.cr.usgs.gov/emodis/CONUS6/expedited/AQUA/{2}/comp_{0}/{1}"'.format(str(endrange), target, year, staticPath)
+    download = '/usr/bin/wget --no-proxy -t 3 -o dldata1.txt -O {3}/ndvi1.zip --no-check-certificate -L --user=fcarter --password=dS6oaPNwEAB7 "https://dds.cr.usgs.gov/emodis/CONUS6/expedited/AQUA/{2}/comp_{0}/{1}"'.format(str(endrange), target, year, staticPath)
     print(download)
     subprocess.call(shlex.split(download))
-
+    print("startingunzip")
     unzipCommand = "/usr/bin/unzip {1} -d {0}".format(os.path.join(staticPath,'histunzipped'),os.path.join(staticPath,'ndvi1.zip'))
     subprocess.call(shlex.split(unzipCommand))
 
@@ -111,11 +111,11 @@ def histdownload(newdate, olddate, picname, year):
     if os.path.isfile(indexFile):
         os.system("rm {}".format(indexFile))
 
-    dlhtml='/usr/bin/wget -P {2}  --no-proxy -t 3 -a {2}/dlhtml2.txt --no-check-certificate -L --user=fcarter --password=dS6oaPNwEAB7 --no-parent -A "US_eMAE_NDVI.{0}.*.QKM.*.zip" https://dds.cr.usgs.gov/emodis/CONUS6/expedited/AQUA/{0}/comp_{1}/'.format(year,str(endrange2),staticPath)
+    dlhtml='/usr/bin/wget -O {2} --no-proxy -t 3 -o dlhtml2.txt --no-check-certificate -L --user=fcarter --password=dS6oaPNwEAB7 --no-parent -A "US_eMAE_NDVI.{0}.*.QKM.*.zip" https://dds.cr.usgs.gov/emodis/CONUS6/expedited/AQUA/{0}/comp_{1}/'.format(year,str(endrange2),indexFile, staticPath)
     print(dlhtml)
     subprocess.call(shlex.split(dlhtml))
     #os.system(dlhtml)
-    indexFile = os.path.join(staticPath,'index.html.tmp')                       
+    #indexFile = os.path.join(staticPath,'index.html.tmp')                       
     if os.path.isfile(indexFile):
         newdateworked=True
         print("newdateworked set to true")
@@ -130,7 +130,7 @@ def histdownload(newdate, olddate, picname, year):
         if "NDVI" in item and "QKM" in item and not ".sum" in item:
             target2=item[9:68]
             print (target2)
-    download = '/usr/bin/wget --no-proxy -t 3 -a {3}/dldata1.txt -O {3}/ndvi2.zip --no-check-certificate -L --user=fcarter --password=dS6oaPNwEAB7 "https://dds.cr.usgs.gov/emodis/CONUS6/expedited/AQUA/{2}/comp_{0}/{1}"'.format(str(endrange2), target2, year, staticPath)
+    download = '/usr/bin/wget --no-proxy -t 3 -o dlndvi2.txt -O {3}/ndvi2.zip --no-check-certificate -L --user=fcarter --password=dS6oaPNwEAB7 "https://dds.cr.usgs.gov/emodis/CONUS6/expedited/AQUA/{2}/comp_{0}/{1}"'.format(str(endrange2), target2, year, staticPath)
     print(download)
     subprocess.call(shlex.split(download))
     #os.system(download)

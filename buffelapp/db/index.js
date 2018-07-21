@@ -3,7 +3,7 @@ const pg = require('pg')
 const pool = new pg.Pool({
     user: 'root',
     database: 'ndvidb',
-    password: 'newPassword' 
+    password: 'rootpass' 
 
 });
 

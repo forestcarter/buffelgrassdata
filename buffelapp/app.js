@@ -33,6 +33,10 @@ function findDataPoints(req,res,next){
 	var maxDay=julDay-1;
 	var minDay=julDay-16;
 	var step=3;
+	
+	minDay=julDay-7;
+	step=1;
+	
 	req.maxDay=maxDay;
 	req.minDay=minDay;
 	req.step=step;

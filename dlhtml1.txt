@@ -1,5 +1,5 @@
-converted 'https://dds.cr.usgs.gov/emodis/CONUS6/expedited/AQUA/2018/comp_159/' (ANSI_X3.4-1968) -> 'https://dds.cr.usgs.gov/emodis/CONUS6/expedited/AQUA/2018/comp_159/' (UTF-8)
---2018-07-07 07:05:07--  https://dds.cr.usgs.gov/emodis/CONUS6/expedited/AQUA/2018/comp_159/
+converted 'https://dds.cr.usgs.gov/emodis/CONUS6/expedited/AQUA/2018/comp_173/' (ANSI_X3.4-1968) -> 'https://dds.cr.usgs.gov/emodis/CONUS6/expedited/AQUA/2018/comp_173/' (UTF-8)
+--2018-07-21 07:53:35--  https://dds.cr.usgs.gov/emodis/CONUS6/expedited/AQUA/2018/comp_173/
 Resolving dds.cr.usgs.gov (dds.cr.usgs.gov)... 152.61.133.66, 152.61.133.67, 2001:49c8:4000:124c::66, ...
 Connecting to dds.cr.usgs.gov (dds.cr.usgs.gov)|152.61.133.66|:443... connected.
 HTTP request sent, awaiting response... 401 Unauthorized
@@ -8,7 +8,7 @@ HTTP request sent, awaiting response... 200 OK
 Length: 1795 (1.8K) [text/html]
 Saving to: '/home/donsaguaro/buffelgrassdata/static/index.html.tmp'
 
-     0K .                                                     100% 80.7M=0s
+     0K .                                                     100% 86.0M=0s
 
-2018-07-07 07:05:07 (80.7 MB/s) - '/home/donsaguaro/buffelgrassdata/static/index.html.tmp' saved [1795/1795]
+2018-07-21 07:53:36 (86.0 MB/s) - '/home/donsaguaro/buffelgrassdata/static/index.html.tmp' saved [1795/1795]
 

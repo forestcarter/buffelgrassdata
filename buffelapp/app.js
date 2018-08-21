@@ -31,11 +31,11 @@ function findDataPoints(req,res,next){
     if(req.query.julDay){
 	var julDay=req.query.julDay;
 	var maxDay=julDay-1;
-	var minDay=julDay-16;
-	var step=3;
 	
-	minDay=julDay-7;
-	step=1;
+	var step=6;
+	
+	var minDay=julDay-step*6;
+	
 	
 	req.maxDay=maxDay;
 	req.minDay=minDay;
@@ -70,6 +70,11 @@ function findDataPoints(req,res,next){
 function renderGraphPage(req, res) {
     console.log("render graph2");
     console.log(req.point1[0])
+    console.log(req.point1[1])
+    console.log(req.point1[2])
+    console.log(req.point1[3])
+    console.log(req.point1[4])
+     console.log(req.point1[5])
     res.render('graph', {
 	minDay: req.minDay,
 	maxDay: req.maxDay,
